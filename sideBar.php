@@ -16,7 +16,7 @@
         </a>
         <a href="student.php">
             <li>
-                <img src="img/instructor-icon.png" alt="An icon representing instructor">
+                <img src="img/student-icon.png" alt="An icon representing instructor">
                 Student
             </li>
         </a>

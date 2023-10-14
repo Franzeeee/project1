@@ -47,12 +47,12 @@ ul a {
 ul li {
     list-style-type: none;
     width: 100%;
-    margin: 20px auto;
+    margin: 15px auto;
     padding: 15px 10px 10px;
     border-radius: 10px;
 }
 
 ul li img {
-    width: 25px;
+    width: 23px;
     margin-top: 5px;
 }

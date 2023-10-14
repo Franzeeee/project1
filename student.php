@@ -12,10 +12,16 @@
 
 <body>
     <div class="wrapper d-flex">
+        <!-- Side Bar Code -->
         <?php
         include 'sideBar.php';
         ?>
+        <!-- Side Bar Code -->
+
+        <!-- You can start coding bellow -->
         <h1>Student Page</h1>
+
+
     </div>
 
 </body>
