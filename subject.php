@@ -7,7 +7,12 @@
     <title>Instructor</title>
     <style>
         .subject {
-            background-color: blue;
+            background-color: #fff;
+            color: black;
+        }
+
+        .subject img {
+            filter: brightness(0);
         }
     </style>
 </head>
