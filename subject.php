@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructor</title>
-    <?php
-    include 'sideBar-Style.php';
-    ?>
+    <style>
+        .subject {
+            background-color: blue;
+        }
+    </style>
 </head>
 
 <body>
