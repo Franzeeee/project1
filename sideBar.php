@@ -3,9 +3,7 @@ require_once 'sideBar-Style.php';
 ?>
 
 <section>
-    <h2><img class="logo" src="img/school-icon.png">Project 1</h2>
-
-    <hr style="color: #fff; height: 2px">
+    <h2><img class="logo" src="img/school-icon.png">iEducatePro</h2>
 
     <ul>
         <a href="subject.php">
