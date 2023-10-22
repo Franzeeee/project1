@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = 'root';
-$password = '';
-$dbname = 'subjects_db';
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'db_connection.php';
 
 if (isset($_GET['id'])) {
     $subjectId = $_GET['id'];
@@ -18,15 +9,15 @@ if (isset($_GET['id'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $subjectCode = $row["subject_code"];
+        $subjectCode = $row["code"];
         $description = $row["description"];
         $unit = $row["unit"];
     } else {
-        header("Location: subjects.php");
+        header("Location: subject.php");
         exit();
     }
 } else {
-    header("Location: subjects.php");
+    header("Location: subject.php");
     exit();
 }
 
@@ -35,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST["description"];
     $unit = $_POST["unit"];
 
-    $sql = "UPDATE subjects SET subject_code = '$subjectCode', description = '$description', unit = $unit WHERE id = $subjectId";
+    $sql = "UPDATE subjects SET code = '$subjectCode', description = '$description', unit = $unit WHERE id = $subjectId";
     if ($conn->query($sql) === TRUE) {
-        header("Location: subjects.php");
+        header("Location: subject.php");
         exit();
     } else {
         echo "Error updating subject: " . $conn->error;
@@ -49,12 +40,13 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Edit Subject</title>
     <style>
         body {
             background-color: darkblue;
-            color: white; 
+            color: white;
             font-family: Arial, sans-serif;
         }
 
@@ -96,6 +88,7 @@ $conn->close();
         }
     </style>
 </head>
+
 <body>
     <h1>Edit Subject</h1>
 
@@ -112,4 +105,5 @@ $conn->close();
         <input type="submit" value="Update">
     </form>
 </body>
+
 </html>

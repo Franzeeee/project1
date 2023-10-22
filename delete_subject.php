@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = 'root';
-$password = '';
-$dbname = 'subjects_db';
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require_once 'db_connection.php';
 
 if (isset($_GET['id'])) {
     $subjectId = $_GET['id'];
@@ -18,11 +9,11 @@ if (isset($_GET['id'])) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $subjectCode = $row["subject_code"];
+        $subjectCode = $row["code"];
         $description = $row["description"];
         $unit = $row["unit"];
     } else {
-        header("Location: subjects.php");
+        header("Location: subject.php");
         exit();
     }
 } else {
@@ -33,7 +24,7 @@ if (isset($_GET['id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "DELETE FROM subjects WHERE id = $subjectId";
     if ($conn->query($sql) === TRUE) {
-        header("Location: subjects.php");
+        header("Location: subject.php");
         exit();
     } else {
         echo "Error deleting subject: " . $conn->error;
@@ -45,6 +36,7 @@ $conn->close();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Delete Subject</title>
     <style>
@@ -68,7 +60,8 @@ $conn->close();
             margin: 20px 0;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid white;
@@ -105,6 +98,7 @@ $conn->close();
         }
     </style>
 </head>
+
 <body>
     <h1>Delete Subject</h1>
 
@@ -127,4 +121,5 @@ $conn->close();
         <input type="submit" value="Delete">
     </form>
 </body>
+
 </html>
