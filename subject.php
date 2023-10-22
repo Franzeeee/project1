@@ -28,16 +28,8 @@
         }
 
         th {
-            background-color: darkblue;
+            background-color: white;
 
-        }
-
-        tr:nth-child(even) {
-            background-color: #003366;
-        }
-
-        tr:hover {
-            background-color: #002244;
         }
 
         button {
@@ -108,19 +100,10 @@
                     <th>Subject Code</th>
                     <th>Description</th>
                     <th>Unit</th>
-
+                    <th>Action</th>
                 </tr>
                 <?php
-                $servername = "localhost";
-                $username = 'root';
-                $password = '';
-                $dbname = 'project1';
-
-                $conn = new mysqli($servername, $username, $password, $dbname);
-
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
+                require_once 'db_connection.php';
 
                 $sql = "SELECT * FROM subjects";
                 $result = $conn->query($sql);

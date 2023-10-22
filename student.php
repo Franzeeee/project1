@@ -24,6 +24,7 @@
                     <th>Lastname</th>
                     <th>Firstname</th>
                     <th>Student ID</th>
+                    <th>Action</th>
                 </tr>
                 <?php
                 $pdo = new PDO('mysql:host=localhost; dbname=project1', 'root');
