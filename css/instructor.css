@@ -113,6 +113,7 @@ tr {
     text-decoration: none;
     display: block;
     color: rgb(0, 0, 0);
+    cursor: pointer;
 }
 
 
@@ -120,5 +121,68 @@ tr {
     background-color: #f1f1f1;
 }
 
+nav h1 a {
+    /* Your CSS styles for the links here */
+    text-decoration: none;
+    /* Remove underlines, adjust as needed */
+    color: #3d3d3d;
+
+    /* Change link color as needed */
+    /* Add other styles as needed */
+}
+
+nav h1 a:hover {
+    /* CSS styles for link hover state */
+    color: #00557e;
+    /* Change link color on hover as needed */
+}
 
 /***** End Main Content *****/
+
+/* Modal */
+
+.deleteModal {
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    background: #00000085;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.deleteModal .modalContainer {
+    margin: 10vh auto;
+    width: 30%;
+    height: 250px;
+    min-width: 600px;
+    max-width: 700px;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    /* transform: translateY(-100%);
+    transition: transform .4s ease-out; */
+}
+
+/* .deleteModal .show {
+    transform: translateY(0);
+} */
+
+.deleteModal h1 {
+    padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid #979797;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 1.5rem;
+    background-color: #ec1010;
+}
+
+.deleteModal .deleteContent {
+    width: 100%;
+    padding: 10px 20px 25px 20px;
+    text-align: center;
+}
