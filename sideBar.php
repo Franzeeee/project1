@@ -1,5 +1,13 @@
 <?php
 require_once 'sideBar-Style.php';
+
+
+if ($_SERVER['REQUEST_URI'] == "/project1/sidebar.php") {
+    header('Location: subject.php');
+    exit;
+}
+
+
 ?>
 
 <section>
