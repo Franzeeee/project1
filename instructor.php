@@ -61,7 +61,7 @@ require_once "db_connection.php";
                                         <div class="dropdown-content">
                                             <a data-id="' . $row['id'] . '" class="edit-button">Edit</a>
                                             <a data-id="' . $row['id'] . '" class="showDeleteModal">Delete</a>
-                                            <a href="instructor_subject.php">View Subjects</a>
+                                            <a href="instructor_subject.php?id=' . $row['id'] . '">View Subjects</a>
                                         </div>
                                     </div>
                                 </td>

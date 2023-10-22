@@ -3,33 +3,26 @@ require_once "db_connection.php";
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Step 2: Fetch data from the database based on the ID
     $query = "SELECT * FROM instructor WHERE id = " . $id;
     $result = $conn->query($query);
 
     if ($result->num_rows == 1) {
-        // Step 3: Populate the form fields with the retrieved data
+
         $row = $result->fetch_assoc();
         $firstname = $row['firstname'];
         $middlename = $row['middlename'];
         $lastname = $row['lastname'];
-    } else {
-        // Handle the case where the ID does not exist in the database
-        // You might want to show an error message or redirect to an error page.
     }
-} else {
-    // Handle the case where the ID is missing or invalid
-    // You might want to show an error message or redirect to an error page.
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve the updated data from the form
+
     $id = $_POST["id"];
     $firstname = $_POST["firstname"];
     $middlename = $_POST["middlename"];
     $lastname = $_POST["lastname"];
 
-    // Construct the SQL UPDATE query
+
     $query = "UPDATE instructor SET firstname = '$firstname', middlename = '$middlename', lastname = '$lastname' WHERE id = $id";
 
     if ($conn->query($query) === TRUE) {
@@ -39,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $conn->error;
     }
 
-    // Close the database connection
+
     $conn->close();
 }
 ?>
