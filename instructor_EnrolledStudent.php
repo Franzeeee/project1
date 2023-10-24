@@ -1,41 +1,33 @@
 <?php
 require_once 'db_connection.php';
+
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM instructor WHERE id = " . $id;
-    $result = $conn->query($sql);
 
-    if ($result) {
-        $row = $result->fetch_assoc();
-
-
-        $instructorName = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'];
-    } else {
-        echo "Error executing SQL query: " . $conn->error;
-    }
-} else {
-    header('location: instructor.php');
+    $subjectEnrolled = $_GET['id'];
 }
 
-$instructorId = $id;
-$sql = "SELECT s.id, s.name
-        FROM subjects s
-        LEFT JOIN instructor_subject isub ON s.id = isub.subject_id AND isub.instructor_id = $instructorId
-        WHERE isub.subject_id IS NULL";
+$subjectId =  $subjectEnrolled;  // Change this to the specific subject ID you want to check
+
+$sql = "SELECT s.id, s.firstname, s.lastname
+        FROM students s
+        LEFT JOIN enrolledstudents es ON s.id = es.student_id AND es.subject_enrolled = $subjectId
+        WHERE es.student_id IS NULL";
 
 $result = $conn->query($sql);
 
 if ($result) {
     // Initialize an empty associative array to store the results
-    $subjectData = array();
+    $studentData = array();
 
     // Fetch and store data in the key-value pair array
     while ($row = $result->fetch_assoc()) {
-        $subjectData[$row['id']] = $row['name'];
+        $studentData[$row['id']] = $row['lastname'] . ', ' . $row['firstname'];
     }
 } else {
     echo "Error executing SQL query: " . $conn->error;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,68 +48,66 @@ if ($result) {
         ?>
         <main>
             <nav>
-                <h1 class="nav-text"><a class="navLink" href="instructor.php">Instructor</a> > Subjects</h1>
+                <h1 class="nav-text"><a class="navLink" href="instructor.php">Instructor</a> > <a class="navLink" onclick="window.history.back()">Subjects</a> > Students</h1>
             </nav>
 
-            <div class="main-content">
+            <div class=" main-content">
                 <div class="addInstructorSection justify-content-between">
-                    <h5 class="">Instructor: <?php echo $instructorName ?></h5>
+                    <h5 class="">Subject: <?php echo $_GET['subjectName'] ?></h5>
                     <button class="btn btn-primary showAddModal">Add Subject</button>
                 </div>
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Subject Name</th>
-                            <th scope="col">Schedule</th>
-                            <th scope="col">Room</th>
-                            <th scope="col">Total Students</th>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Student ID #</th>
+                            <th scope="col">Grade</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        <tr>
-                            <?php
-                            $sql = "SELECT isub.*, s.name AS subject_name, (
-                                SELECT COUNT(*) 
-                                FROM enrolledStudents es
-                                WHERE es.subject_enrolled = isub.id
-                            ) AS totalStudents
-                            FROM instructor_subject AS isub
-                            LEFT JOIN subjects AS s ON isub.subject_id = s.id
-                            WHERE isub.instructor_id = " . $id;
 
+                        <?php
+                        $sql = "SELECT e.id, s.lastname, s.firstname, e.grade
+FROM enrolledstudents e
+JOIN students s ON e.student_id = s.id
+WHERE e.subject_enrolled = ?";
 
-                            $result = $conn->query($sql);
-                            $counter = 0;
+                        // Create a prepared statement
+                        $stmt = $conn->prepare($sql);
 
-                            if ($result) {
-                                while ($row = $result->fetch_assoc()) {
-                                    $counter++;
-                                    echo ' <tr>
-                                            <th scope="row">' . $counter . '</th>
-                                            <td>' . $row['subject_name'] . '</td>
-                                            <td>' . $row['schedule'] . '</td>
-                                            <td>' . $row['room'] . '</td>
-                                            <td>' . $row['totalStudents'] . '</td>
-                                            <td>
-                                                <div class="dropdown" id="myDropdown">
-                                                    <img src="img/3-dots.png" class="dropbtn" onclick="toggleDropdown(this)" alt="">
-                                                    <div class="dropdown-content">
-                                                        <a class="edit-button" data-name="' . $row['subject_name'] . '" data-id="' . $row['id'] . '">Edit</a>
-                                                        <a class="showDeleteModal" data-id="' . $row['id'] . '">Delete</a>
-                                                        <a href="instructor_EnrolledStudent.php?subjectName=' . $row['subject_name'] . '&id=' . $row['id'] . '">View Students</a>
-                                                    </div>
+                        // Bind the parameter
+                        $stmt->bind_param("i", $subjectEnrolled);
+
+                        // Execute the query
+                        $stmt->execute();
+
+                        // Get the result
+                        $result = $stmt->get_result();
+
+                        // Fetch and process the rows
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<tr>
+                                        <th scope="row">1</th>
+                                        <td>' . $row['firstname'] . " " . $row['lastname'] . '</td>
+                                        <td>' . $row['id'] . '</td>
+                                        <td>' . $row['grade'] . '</td>
+                                        <td>
+                                            <div class="dropdown" id="myDropdown">
+                                                <img src="img/3-dots.png" class="dropbtn" onclick="toggleDropdown(this)" alt="">
+                                                <div class="dropdown-content">
+                                                    <a class="edit-button" data-id="' . $row['id'] . '">Edit</a>
+                                                    <a class="showDeleteModal" data-id="' . $row['id'] . '">Delete</a>
                                                 </div>
-                                            </td>
-                                        </tr>';
-                                }
-                                $conn->close();
-                            } else {
-                                echo "Error executing SQL query: " . $conn->error;
-                            }
-                            ?>
+                                            </div>
+                                        </td>
+                                    </tr>';
+                        }
 
+                        // Close the statement and the connection
+                        $stmt->close();
+                        ?>
 
                     </tbody>
                 </table>
@@ -130,11 +120,11 @@ if ($result) {
         <div class="addModalContainer w-50 h-75 bg-light m-auto mt-4 rounded-top d-flex flex-column justify-content-start align-items-center">
             <h1 class="w-100 bg-dark p-3 text-center text-light rounded-top">Add Subject</h1>
             <form action="add_instructorSubject.php" class="addSubjectForm p-5 pt-3 w-100">
-                <input type="hidden" name="id" id="instructorSub_ID" value="<?php echo $id ?>">
+                <input type="hidden" name="id" value="<?php echo $id ?>">
                 <div class="form-group col-auto">
-                    <label for="inputState" class="h5">Subject: </label>
+                    <label for="inputState" class="h5">Students: </label>
                     <select id="inputState" class="form-control p-2" name="subject" required>
-                        <option selected>Choose Subject...</option>
+                        <option selected>Choose Student...</option>
                         <?php
                         foreach ($subjectData as $id => $name) {
                             echo '<option value="' . $id . '">' . $name . '</option>';
@@ -163,8 +153,8 @@ if ($result) {
             <h1 class="w-100 bg-dark p-3 text-center text-light rounded-top">Edit Subject</h1>
             <form action="edit_instructorSubject.php" method="POST" class="editForm updateSubjectForm p-5 pt-3 w-100">
                 <div class="form-group col-auto">
-                    <input type="hidden" name="id" id="instructorSub_ID">
-                    <label for=" inputState" class="h5">Subject: </label>
+                    <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
+                    <label for="inputState" class="h5">Subject: </label>
                     <select id="editInputState" class="form-control p-2" name="subject" required>
                         <option selected id="editSubjectId"></option>
                         <?php

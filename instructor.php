@@ -1,5 +1,17 @@
 <?php
 require_once "db_connection.php";
+
+// Count the total subject of the instructor
+function getTotalSubjects($instructorId, $conn)
+{
+    $sql = "SELECT COUNT(subject_id) AS total_subjects FROM instructor_subject WHERE instructor_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $instructorId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['total_subjects'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,12 +61,14 @@ require_once "db_connection.php";
                             // Output data for each row
                             while ($row = $result->fetch_assoc()) {
                                 $rowIndex++;
+                                $instructorId = $row['id'];
+                                $totalSubjects = getTotalSubjects($instructorId, $conn);
                                 echo ' <tr>
                                 <th scope="row">' . $rowIndex . '</th>
                                 <td>' . $row['lastname'] . '</td>
                                 <td>' . $row['firstname'] . '</td>
                                 <td>' . $row['middlename'] . '</td>
-                                <td>4</td>
+                                <td>' . $totalSubjects . '</td>
                                 <td>
                                     <div class="dropdown" id="myDropdown">
                                         <img src="img/3-dots.png" class="dropbtn" onclick="toggleDropdown(this)" alt="">

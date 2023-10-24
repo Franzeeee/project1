@@ -19,11 +19,12 @@ $(document).ready(function () {
         const id = $(this).data('id');
         $(".deleteModal").removeClass("d-none");
         $("#confirmDeleteButton").data('id', id); // Set the data-id in the Confirm button
+        alert(id)
     });
 
     function deleteData(id) {
         $.ajax({
-            // url: 'delete_instructor.php',
+            url: 'delete_instructorSubject.php',
             method: 'POST',
             data: { id: id },
             success: function (response) {
@@ -50,10 +51,45 @@ $(document).ready(function () {
         $(".deleteModal").addClass("d-none");
     });
 
+
+    // Modal For Edit Feature
     $(".edit-button").on("click", function () {
-        alert();
+        const id = $(this).data('id');
+        const subjectName = $(this).data('name');
+
+        const $editModal = $(".editModal");
+        const $editForm = $editModal.find(".editForm");
+        const selectElement = document.getElementById("editInputState");
+
+        // Fetch data for the selected row via AJAX
+        $.ajax({
+            url: "edit_instructorSubject.php",
+            type: "GET",
+            data: { id: id },
+            success: function (response) {
+                const data = JSON.parse(response);
+
+                // Populate the edit modal with the data
+                $editForm.find("#instructorSub_ID").val(id);
+                $editForm.find("#editSubjectId").val(data.subject_id);
+                const optionToChange = selectElement.options[0];
+                optionToChange.textContent = subjectName;
+                $editForm.find("#editSchedule").val(data.schedule);
+                $editForm.find("#editRoom").val(data.room);
+
+                // Show the edit modal
+                $editModal.removeClass("d-none");
+            },
+            error: function () {
+                alert("Failed to load the edit page.");
+            }
+        });
     });
 
+
+    $("#cancelEdit").on("click", function () {
+        $(".editModal").addClass("d-none");
+    });
 
 
 
@@ -64,14 +100,11 @@ $(document).ready(function () {
         }
     });
 
-    // Listen for the form submission
+
     $(".addSubjectForm").on("submit", function (e) {
-        e.preventDefault(); // Prevent the default form submission behavior
+        e.preventDefault();
 
-        // Serialize the form data
         var formData = $(this).serialize();
-
-        // Send an AJAX POST request
         $.ajax({
             url: "add_instructorSubject.php",
             method: "POST",
@@ -79,9 +112,33 @@ $(document).ready(function () {
             success: function (response) {
                 alert("Subject Successfully Added!");
                 $(".addModal").addClass("d-none");
+                location.reload();
             },
             error: function (error) {
-                // Handle errors here, e.g., display an error message
+
+                console.log("Error: " + error);
+            }
+        });
+
+    });
+
+    $(".editForm").on("submit", function (e) {
+        e.preventDefault();
+
+
+        var formData = $(this).serialize();
+
+        $.ajax({
+            url: "edit_instructorSubject.php",
+            method: "POST",
+            data: formData,
+            success: function (response) {
+                alert("Subject Successfully Added!");
+                $(".addModal").addClass("d-none");
+                location.reload();
+            },
+            error: function (error) {
+
                 console.log("Error: " + error);
             }
         });
