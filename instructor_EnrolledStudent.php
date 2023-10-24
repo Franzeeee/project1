@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
     $subjectEnrolled = $_GET['id'];
 }
 
-$subjectId =  $subjectEnrolled;  // Change this to the specific subject ID you want to check
+$subjectId =  $subjectEnrolled;
 
 $sql = "SELECT s.id, s.firstname, s.lastname
         FROM students s
@@ -38,7 +38,7 @@ if ($result) {
     <title>Instructor Subject</title>
     <link rel="stylesheet" href="css/instructor.css">
     <link rel="stylesheet" href="css/add_instructor.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="bootstrap/" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 
 <body>
@@ -54,7 +54,7 @@ if ($result) {
             <div class=" main-content">
                 <div class="addInstructorSection justify-content-between">
                     <h5 class="">Subject: <?php echo $_GET['subjectName'] ?></h5>
-                    <button class="btn btn-primary showAddModal">Add Subject</button>
+                    <button class="btn btn-primary showAddModal">Add Student</button>
                 </div>
                 <table class="table">
                     <thead class="thead-dark">
@@ -70,9 +70,9 @@ if ($result) {
 
                         <?php
                         $sql = "SELECT e.id, s.lastname, s.firstname, e.grade
-FROM enrolledstudents e
-JOIN students s ON e.student_id = s.id
-WHERE e.subject_enrolled = ?";
+                                FROM enrolledstudents e
+                                JOIN students s ON e.student_id = s.id
+                                WHERE e.subject_enrolled = ?";
 
                         // Create a prepared statement
                         $stmt = $conn->prepare($sql);
@@ -85,11 +85,12 @@ WHERE e.subject_enrolled = ?";
 
                         // Get the result
                         $result = $stmt->get_result();
-
+                        $counter = 0;
                         // Fetch and process the rows
                         while ($row = $result->fetch_assoc()) {
+                            $counter++;
                             echo '<tr>
-                                        <th scope="row">1</th>
+                                        <th scope="row">' . $counter . '</th>
                                         <td>' . $row['firstname'] . " " . $row['lastname'] . '</td>
                                         <td>' . $row['id'] . '</td>
                                         <td>' . $row['grade'] . '</td>
@@ -123,10 +124,10 @@ WHERE e.subject_enrolled = ?";
                 <input type="hidden" name="id" value="<?php echo $id ?>">
                 <div class="form-group col-auto">
                     <label for="inputState" class="h5">Students: </label>
-                    <select id="inputState" class="form-control p-2" name="subject" required>
+                    <select id="inputState" class="form-control p-2" name="student" required>
                         <option selected>Choose Student...</option>
                         <?php
-                        foreach ($subjectData as $id => $name) {
+                        foreach ($studentData as $id => $name) {
                             echo '<option value="' . $id . '">' . $name . '</option>';
                         }
                         ?>
@@ -137,12 +138,12 @@ WHERE e.subject_enrolled = ?";
                     <input type="text" class="form-control p-2" id="schedule" placeholder="ex. MTH 9:00-10:00AM" name="schedule" required>
                 </div>
                 <div class="form-group">
-                    <label class="h5 mt-2" for="Room">Room</label>
-                    <input type="text" class="form-control p-2" id="schedule" placeholder="ex. ORC 16" name="room" required>
+                    <label class="h5 mt-2" for "Room">Room</label>
+                    <input type="text" class="form-control p-2" id="room" placeholder="ex. ORC 16" name="room" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100 p-2 mt-5">Submit</button>
-
             </form>
+
             <button class="btn btn-danger w-75 p-2" id="cancelAdd">Cancel</button>
         </div>
     </div>
@@ -158,7 +159,7 @@ WHERE e.subject_enrolled = ?";
                     <select id="editInputState" class="form-control p-2" name="subject" required>
                         <option selected id="editSubjectId"></option>
                         <?php
-                        foreach ($subjectData as $id => $name) {
+                        foreach ($studentData as $id => $name) {
                             echo '<option value="' . $id . '">' . $name . '</option>';
                         }
                         ?>
