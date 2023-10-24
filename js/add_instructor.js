@@ -19,7 +19,6 @@ $(document).ready(function () {
         const id = $(this).data('id');
         $(".deleteModal").removeClass("d-none");
         $("#confirmDeleteButton").data('id', id); // Set the data-id in the Confirm button
-        alert(id)
     });
 
     function deleteData(id) {
