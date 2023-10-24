@@ -5,7 +5,7 @@ $subjectCode = $_POST['subject_code'];
 $description = $_POST['description'];
 $unit = $_POST['unit'];
 
-$sql = "INSERT INTO subjects (name, code, description, unit) VALUES ('$subjectNamee', '$subjectCode', '$description', '$unit')";
+$sql = "INSERT INTO subjects (name, code, description, unit) VALUES ('$subjectName', '$subjectCode', '$description', '$unit')";
 if ($conn->query($sql) === TRUE) {
     echo "Subject added successfully";
     header('location: subject.php');
