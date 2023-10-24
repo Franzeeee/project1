@@ -35,7 +35,7 @@
                     echo "<td>{$row['firstname']}</td>";
                     echo "<td>{$row['student_id']}</td>";
                     echo "<td>
-                            <button><a href='student_subjects.php?id={$row['student_id']}'>View Subjects</a></button>
+                            <button><a href='student_subjects.php?id={$row['id']}'>View Subjects</a></button>
                             <button><a href='edit_student.php?id={$row['student_id']}'>Edit</a></button>
                             <button><a href='delete_student.php?id={$row['student_id']}'>Delete</a></button>
                           </td>";
