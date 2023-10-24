@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Add Subject</title>
     <style>
         body {
             background-color: darkblue;
-            color: white; 
+            color: white;
             font-family: Arial, sans-serif;
         }
 
@@ -48,10 +49,15 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Add Subject</h1>
 
     <form action="save_subject.php" method="POST">
+
+        <label for="description">Subject Name:</label>
+        <input type="text" id="description" name="subject_name" required>
+
         <label for="subject_code">Subject Code:</label>
         <input type="text" id="subject_code" name="subject_code" required>
 
@@ -64,4 +70,5 @@
         <input type="submit" value="Add Subject">
     </form>
 </body>
+
 </html>

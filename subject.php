@@ -96,7 +96,7 @@
 
             <table>
                 <tr>
-
+                    <th>Subject Name</th>
                     <th>Subject Code</th>
                     <th>Description</th>
                     <th>Unit</th>
@@ -111,6 +111,7 @@
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
+                        echo "<td>" . $row["name"] . "</td>";
                         echo "<td>" . $row["code"] . "</td>";
                         echo "<td>" . $row["description"] . "</td>";
                         echo "<td>" . $row["unit"] . "</td>";
