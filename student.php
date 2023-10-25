@@ -29,7 +29,7 @@
                 </tr>
                 </thead>
 
-                <tbody class="table-group-divider">
+                <tbody class="table-group-divider container">
                 <?php
                 $pdo = new PDO('mysql:host=localhost; dbname=project1', 'root');
                 $stmt = $pdo->query('SELECT * FROM students');
