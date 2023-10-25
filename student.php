@@ -27,7 +27,7 @@
                     <th>Action</th>
                 </tr>
                 <?php
-                $pdo = new PDO('mysql:host=localhost; dbname=project1', 'root');
+                $pdo = new PDO('mysql:host=localhost;port=4306;dbname=project1', 'root', '');
                 $stmt = $pdo->query('SELECT * FROM students');
                 while ($row = $stmt->fetch()) {
                     echo "<tr>";

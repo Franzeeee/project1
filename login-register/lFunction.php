@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $find = $conn->query("SELECT * FROM `registration` WHERE username = '$username'");
+    $find = $conn->query("SELECT * FROM `user_profile` WHERE username = '$username'");
 
     if ($find->num_rows > 0) {
         $data = $find->fetch_array();

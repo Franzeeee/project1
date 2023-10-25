@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $student_id = $_POST['student_id'];
 
     // Perform database connection and insertion here
-    $pdo = new PDO('mysql:host=localhost;dbname=project1', 'root');
+    $pdo = new PDO('mysql:host=localhost;port=4306;dbname=project1', 'root');
     $stmt = $pdo->prepare('INSERT INTO students (lastname, firstname, student_id) VALUES (?, ?, ?)');
     $result = $stmt->execute([$lastname, $firstname, $student_id]);
 

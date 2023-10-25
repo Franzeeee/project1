@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<script>alert('Please Enter a password')</script>";
     } else {
 
-        $sql = "INSERT INTO registration (`firstname`, `lastname`, `email`, `username`, `password`) VALUES ('$firstname', '$lastname', '$email', '$username', '$hashedPassword')";
+        $sql = "INSERT INTO user_profile (`firstname`, `lastname`, `email`, `username`, `password`) VALUES ('$firstname', '$lastname', '$email', '$username', '$hashedPassword')";
 
 
         if ($conn->query($sql) === TRUE) {

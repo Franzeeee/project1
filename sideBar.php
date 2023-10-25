@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_URI'] == "/project1/sidebar.php") {
                 success: function(response) {
                     if (response === 'success') {
                         alert('Logout Successfully');
-                        window.location.href = 'login.php'; // Redirect to the login page
+                        window.location.href = 'login-register/login.php'; // Redirect to the login page
                     } else {
                         alert('Failed to destroy session');
                     }
