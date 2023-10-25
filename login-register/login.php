@@ -19,7 +19,7 @@ require_once("lFunction.php");
 
     </div>
 
-    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST">
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" style="min-height: 200px">
         <legend id="formChild">LOGIN</legend>
         <?php
         if (empty($username)) {
