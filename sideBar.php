@@ -39,6 +39,25 @@ if ($_SERVER['REQUEST_URI'] == "/project1/sidebar.php") {
             <div class="name">John Doe</div>
             <div class="user-type">Admin</div>
         </div>
-        <img src="img/logout.png" class="logout" alt="">
+        <img src="img/logout.png" id="logoutButton" class="logout" alt="">
     </div>
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#logoutButton").click(function() {
+            $.ajax({
+                url: 'logout.php',
+                method: 'POST',
+                success: function(response) {
+                    if (response === 'success') {
+                        alert('Logout Successfully');
+                        window.location.href = 'login.php'; // Redirect to the login page
+                    } else {
+                        alert('Failed to destroy session');
+                    }
+                }
+            });
+        });
+    });
+</script>
