@@ -98,8 +98,8 @@ if ($result) {
                                             <div class="dropdown" id="myDropdown">
                                                 <img src="img/3-dots.png" class="dropbtn" onclick="toggleDropdown(this)" alt="">
                                                 <div class="dropdown-content">
-                                                    <a class="edit-button" data-id="' . $row['id'] . '">Edit</a>
-                                                    <a class="showDeleteModal" data-id="' . $row['id'] . '">Delete</a>
+                                                    <a class="editModal-Student" data-id="' . $row['id'] . '">Edit Grade</a>
+                                                    <a class="showDeleteModal" data-id="' . $row['id'] . '">Delete Student</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -119,9 +119,9 @@ if ($result) {
     <!-- Add Modal -->
     <div class="addModal w-100 h-100 position-absolute top-0 left-0 d-none" style="background-color: #00000085;">
         <div class="addModalContainer w-50 h-75 bg-light m-auto mt-4 rounded-top d-flex flex-column justify-content-start align-items-center">
-            <h1 class="w-100 bg-dark p-3 text-center text-light rounded-top">Add Subject</h1>
-            <form action="add_instructorSubject.php" class="addSubjectForm p-5 pt-3 w-100">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
+            <h1 class="w-100 bg-dark p-3 text-center text-light rounded-top">Add Student</h1>
+            <form action="add_enrolledStudent.php" method="POST" class="addStudentForm p-5 pt-3 w-100">
+                <input type="hidden" name="id" value="<?php echo $subjectEnrolled; ?>">
                 <div class="form-group col-auto">
                     <label for="inputState" class="h5">Students: </label>
                     <select id="inputState" class="form-control p-2" name="student" required>
@@ -134,12 +134,8 @@ if ($result) {
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="h5 mt-2" for="Schedule">Schedule</label>
-                    <input type="text" class="form-control p-2" id="schedule" placeholder="ex. MTH 9:00-10:00AM" name="schedule" required>
-                </div>
-                <div class="form-group">
-                    <label class="h5 mt-2" for "Room">Room</label>
-                    <input type="text" class="form-control p-2" id="room" placeholder="ex. ORC 16" name="room" required>
+                    <label class="h5 mt-2" for="grade">Grade: </label>
+                    <input type="text" class="form-control p-2" id="schedule" placeholder="Grades: 1-3, 5, INC and DRP" value="No Grade" name="grade" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100 p-2 mt-5">Submit</button>
             </form>
@@ -150,30 +146,15 @@ if ($result) {
 
     <!-- Edit Modal -->
     <div class="editModal w-100 h-100 position-absolute top-0 left-0 d-none" style="background-color: #00000085;z-index: 9999">
-        <div class="addModalContainer w-50 h-75 bg-light m-auto mt-4 rounded-top d-flex flex-column justify-content-start align-items-center">
-            <h1 class="w-100 bg-dark p-3 text-center text-light rounded-top">Edit Subject</h1>
-            <form action="edit_instructorSubject.php" method="POST" class="editForm updateSubjectForm p-5 pt-3 w-100">
-                <div class="form-group col-auto">
-                    <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
-                    <label for="inputState" class="h5">Subject: </label>
-                    <select id="editInputState" class="form-control p-2" name="subject" required>
-                        <option selected id="editSubjectId"></option>
-                        <?php
-                        foreach ($studentData as $id => $name) {
-                            echo '<option value="' . $id . '">' . $name . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
+        <div class="addModalContainer w-50 h-50 bg-light m-auto mt-2 rounded-top d-flex flex-column justify-content-start align-items-center">
+            <h1 class="w-100 bg-dark p-3 text-center text-light rounded-top">Edit Grade</h1>
+            <form action="edit_enrolledStudent.php" method="POST" class="editForm updateSubjectForm p-5 pt-3 w-100">
+                <input type="hidden" id="id" name="id">
                 <div class="form-group">
-                    <label class="h5 mt-2" for="Schedule">Schedule</label>
-                    <input type="text" class="form-control p-2" id="editSchedule" placeholder="ex. MTH 9:00-10:00AM" name="schedule" required>
+                    <label class="h5 mt-2" for="Room">Grade:</label>
+                    <input type="text" class="form-control p-2" id="grade" placeholder="Grades(1-3, 5, INC, and DRP)" name="grade" required>
                 </div>
-                <div class="form-group">
-                    <label class="h5 mt-2" for="Room">Room</label>
-                    <input type="text" class="form-control p-2" id="editRoom" placeholder="ex. ORC 16" name="room" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100 p-2 mt-5">Submit</button>
+                <button type="submit" class="btn btn-primary w-100 p-2 mt-3">Submit</button>
             </form>
             <button class="btn btn-danger w-75 p-2" id="cancelEdit">Cancel</button>
         </div>
@@ -195,7 +176,7 @@ if ($result) {
     </div>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script defer src="js/add_instructor.js"></script>
+    <script defer src="js/enrolledStudent.js"></script>
 </body>
 
 </html>
