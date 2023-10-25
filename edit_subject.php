@@ -43,11 +43,44 @@ $conn->close();
 
 <head>
     <title>Edit Subject</title>
+    <?php
+    include_once 'sideBar-Style.php';
+    ?>
     <style>
         body {
-            background-color: darkblue;
+            background-color: #333;
+
+        }
+
+        /***** SideBar *****/
+        .subject {
+            background-color: #fff;
+            color: black;
+        }
+
+        .subject img {
+            filter: brightness(0);
+        }
+
+        /***** End SideBar *****/
+
+        .wrapper {
+            display: flex;
+            /* background-color: #f0f0f0; */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
             color: white;
-            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 250px);
+            color: white;
         }
 
         h1 {
@@ -63,6 +96,7 @@ $conn->close();
             display: block;
             margin-top: 10px;
             text-align: left;
+
         }
 
         input[type="text"],
@@ -75,35 +109,44 @@ $conn->close();
         }
 
         input[type="submit"] {
-            background-color: darkblue;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 25px;
             cursor: pointer;
             border-radius: 5px;
+            margin-top: 10px;
+            background-color: #222222;
+            transition: background-color .5s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #002244;
+            background-color: #051b31;
         }
     </style>
 </head>
 
 <body>
-    <h1>Edit Subject</h1>
+    <div class="wrapper d-flex">
+        <?php
+        include 'sideBar.php';
+        ?>
+        <main>
+            <h1>Edit Subjects</h1>
 
-    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id=' . $subjectId; ?>">
-        <label for="subject_code">Subject Code:</label>
-        <input type="text" name="subject_code" value="<?php echo $subjectCode; ?>" required><br>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id=' . $subjectId; ?>">
+                <label for="subject_code">Subject Code:</label>
+                <input type="text" name="subject_code" value="<?php echo $subjectCode; ?>" required><br>
 
-        <label for="description">Description:</label>
-        <input type="text" name="description" value="<?php echo $description; ?>" required><br>
+                <label for="description">Description:</label>
+                <input type="text" name="description" value="<?php echo $description; ?>" required><br>
 
-        <label for="unit">Unit:</label>
-        <input type="number" name="unit" value="<?php echo $unit; ?>" required><br>
+                <label for="unit">Unit:</label>
+                <input type="number" name="unit" value="<?php echo $unit; ?>" required><br>
 
-        <input type="submit" value="Update">
-    </form>
+                <input type="submit" value="Update">
+            </form>
+        </main>
+    </div>
 </body>
 
 </html>

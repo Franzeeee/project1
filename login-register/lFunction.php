@@ -8,13 +8,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $find = $conn->query("SELECT * FROM `registration` WHERE username = '$username'");
+    $find = $conn->query("SELECT * FROM `user_profile` WHERE username = '$username'");
 
     if ($find->num_rows > 0) {
         $data = $find->fetch_array();
 
         if (password_verify($password, $data['password'])) {
-            $_SESSION['username'] = $username;
+            $_SESSION['name'] = $data['firstname'] . " " . $data['lastname'];
 
             header("Location: ../subject.php");
         } else {

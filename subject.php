@@ -28,12 +28,13 @@
         }
 
         th {
-            background-color: white;
+            background-color: #333;
+            color: #ffffff;
 
         }
 
         button {
-            background-color: darkblue;
+            background-color: #222222;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -42,7 +43,7 @@
         }
 
         button:hover {
-            background-color: #002244;
+            background-color: #051b31;
         }
 
         p {
@@ -80,7 +81,21 @@
             width: calc(100% - 250px);
             height: 100dvh;
             padding: 0 20px;
-            background-color: #ffffff;
+            background-color: #333;
+            color: #ffffff;
+        }
+
+        nav {
+            width: 100%;
+            padding: 20px 0 5px;
+            border-bottom: 3px solid rgba(22, 22, 22, 0.17);
+        }
+
+        nav h1 {
+            font-size: 1.4rem;
+            color: #fafafa;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
         }
     </style>
 
@@ -92,7 +107,9 @@
         include 'sideBar.php';
         ?>
         <main>
-            <h1>List of Subjects</h1>
+            <nav>
+                <h1 class="nav-text"><a>Subject</a></h1>
+            </nav>
 
             <table>
                 <tr>

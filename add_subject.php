@@ -8,7 +8,7 @@
     ?>
     <style>
         body {
-            background-color: darkblue;
+            background-color: #333;
             color: white;
             font-family: Arial, sans-serif;
         }
@@ -69,19 +69,19 @@
         }
 
         input[type="submit"] {
-            background-color: darkblue;
+            /* background-color: gray; */
             color: white;
             border: none;
             padding: 15px 25px;
             cursor: pointer;
             border-radius: 5px;
             margin-top: 10px;
-            background-color: #002244;
+            background-color: #222222;
             transition: background-color .5s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #0073e5;
+            background-color: #051b31;
         }
     </style>
 </head>

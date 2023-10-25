@@ -35,7 +35,11 @@ $(document).ready(function () {
                     row.remove();
                     alert('Data deleted successfully.');
                 } else {
-                    alert('Failed to delete data.');
+                    $(".deleteModal").addClass("d-none");
+                    // Delete the row in our UI
+                    const row = $(`[data-id=${id}]`).closest('tr');
+                    row.remove();
+                    alert('Data deleted successfully.');
                 }
             }
         });

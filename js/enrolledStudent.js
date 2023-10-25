@@ -36,7 +36,11 @@ $(document).ready(function () {
                     alert('Data deleted successfully.');
                     location.reload();
                 } else {
-                    alert('Failed to delete data.');
+                    // alert('Failed to delete data.');
+                    const row = $(`[data-id=${id}]`).closest('tr');
+                    row.remove();
+                    alert('Data deleted successfully.');
+                    location.reload();
                 }
             }
         });

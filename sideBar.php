@@ -1,12 +1,16 @@
 <?php
 require_once 'sideBar-Style.php';
+session_start();
+if (empty($_SESSION['name'])) {
+    header('location: login-register/login.php');
+}
 
+$name = $_SESSION['name'];
 
 if ($_SERVER['REQUEST_URI'] == "/project1/sidebar.php") {
     header('Location: subject.php');
     exit;
 }
-
 
 ?>
 
@@ -36,7 +40,7 @@ if ($_SERVER['REQUEST_URI'] == "/project1/sidebar.php") {
     <div class="user w-100 bg-light">
         <img src="img/man.png" class="user-profile" alt="">
         <div class="user-name">
-            <div class="name">John Doe</div>
+            <div class="name"><?php echo $name ?></div>
             <div class="user-type">Admin</div>
         </div>
         <img src="img/logout.png" id="logoutButton" class="logout" alt="">
@@ -52,7 +56,7 @@ if ($_SERVER['REQUEST_URI'] == "/project1/sidebar.php") {
                 success: function(response) {
                     if (response === 'success') {
                         alert('Logout Successfully');
-                        window.location.href = 'login.php'; // Redirect to the login page
+                        window.location.href = 'login-register/login.php'; // Redirect to the login page
                     } else {
                         alert('Failed to destroy session');
                     }

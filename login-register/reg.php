@@ -2,6 +2,7 @@
 
 <html <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +34,7 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    
+
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $username = $_POST['username'];
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo "<script>alert('Please Enter a password')</script>";
     } else {
 
-        $sql = "INSERT INTO registration (`firstname`, `lastname`, `email`, `username`, `password`) VALUES ('$firstname', '$lastname', '$email', '$username', '$hashedPassword')";
+        $sql = "INSERT INTO user_profile (`firstname`, `lastname`, `email`, `username`, `password`) VALUES ('$firstname', '$lastname', '$email', '$username', '$hashedPassword')";
 
 
         if ($conn->query($sql) === TRUE) {
@@ -62,11 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
         }
-        
-
-    
     }
-    
 }
 
 ?>

@@ -2,8 +2,7 @@
 require_once("lFunction.php");
 ?>
 
-<html <!DOCTYPE html>
-
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -14,12 +13,9 @@ require_once("lFunction.php");
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
-    <div>
+<body style="height: 89dvh;">
 
-    </div>
-
-    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" style="min-height: 200px">
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" style="min-height: 200px;">
         <legend id="formChild">LOGIN</legend>
         <?php
         if (empty($username)) {
@@ -39,12 +35,3 @@ require_once("lFunction.php");
 </body>
 
 </html>
-
-<!--This is PHP code-->
-<?php
-
-
-
-
-
-?>

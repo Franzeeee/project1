@@ -123,7 +123,7 @@ if ($result) {
             <form action="add_enrolledStudent.php" method="POST" class="addStudentForm p-5 pt-3 w-100">
                 <input type="hidden" name="id" value="<?php echo $subjectEnrolled; ?>">
                 <div class="form-group col-auto">
-                    <label for="inputState" class="h5">Students: </label>
+                    <label for="inputState" class="h5" style="color: white">Students: </label>
                     <select id="inputState" class="form-control p-2" name="student" required>
                         <option selected>Choose Student...</option>
                         <?php

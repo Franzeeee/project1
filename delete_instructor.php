@@ -1,4 +1,5 @@
 <?php
+
 require_once "db_connection.php"; // Include your database connection file
 
 if (isset($_POST['id'])) {

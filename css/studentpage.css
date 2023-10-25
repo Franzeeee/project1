@@ -33,7 +33,15 @@ body {
 .content {
     flex: 1;
     padding: 20px;
-    background-color: white;
+    background-color: #101010;
+    color: white;
+
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 250px);
 }
 
 h1 {
@@ -103,4 +111,17 @@ button:hover {
     border: 1px solid #a94442;
     padding: 10px;
     margin-top: 20px;
+}
+
+nav {
+    width: 100%;
+    padding: 10px 0 5px;
+    border-bottom: 3px solid rgb(227 227 227 / 17%);
+}
+
+nav h1 {
+    font-size: 1.4rem;
+    color: #fafafa;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
 }
