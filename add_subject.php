@@ -3,11 +3,44 @@
 
 <head>
     <title>Add Subject</title>
+    <?php
+    include_once 'sideBar-Style.php';
+    ?>
     <style>
         body {
             background-color: darkblue;
             color: white;
             font-family: Arial, sans-serif;
+        }
+
+        /***** SideBar *****/
+        .subject {
+            background-color: #fff;
+            color: black;
+        }
+
+        .subject img {
+            filter: brightness(0);
+        }
+
+        /***** End SideBar *****/
+
+        .wrapper {
+            display: flex;
+            /* background-color: #f0f0f0; */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            width: calc(100% - 250px);
         }
 
         h1 {
@@ -39,36 +72,45 @@
             background-color: darkblue;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 25px;
             cursor: pointer;
             border-radius: 5px;
+            margin-top: 10px;
+            background-color: #002244;
+            transition: background-color .5s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #002244;
+            background-color: #0073e5;
         }
     </style>
 </head>
 
 <body>
-    <h1>Add Subject</h1>
+    <div class="wrapper d-flex">
+        <?php
+        include_once 'sideBar.php';
+        ?>
+        <main>
+            <h1>Add Subject</h1>
+            <form action="save_subject.php" method="POST">
 
-    <form action="save_subject.php" method="POST">
+                <label for="description">Subject Name:</label>
+                <input type="text" id="description" name="subject_name" required>
 
-        <label for="description">Subject Name:</label>
-        <input type="text" id="description" name="subject_name" required>
+                <label for="subject_code">Subject Code:</label>
+                <input type="text" id="subject_code" name="subject_code" required>
 
-        <label for="subject_code">Subject Code:</label>
-        <input type="text" id="subject_code" name="subject_code" required>
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" required>
 
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
+                <label for="unit">Unit:</label>
+                <input type="number" id="unit" name="unit" required>
 
-        <label for="unit">Unit:</label>
-        <input type="number" id="unit" name="unit" required>
-
-        <input type="submit" value="Add Subject">
-    </form>
+                <input type="submit" value="Add Subject">
+            </form>
+        </main>
+    </div>
 </body>
 
 </html>
