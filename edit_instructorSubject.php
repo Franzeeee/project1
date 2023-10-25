@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the data from the form
     $Strid = $_POST["id"];
     // Convert to int
-    $id = 5;
+    $id = intval($Strid);
     $subject = $_POST["subject"];
     // Convert to int
     $subjectId = intval($subject);
