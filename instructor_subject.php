@@ -64,7 +64,7 @@ if ($result) {
                     <h5 class="">Instructor: <?php echo $instructorName ?></h5>
                     <button class="btn btn-primary showAddModal">Add Subject</button>
                 </div>
-                <table class="table">
+                <table class="table table-dark">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>

@@ -45,7 +45,7 @@ function getTotalSubjects($instructorId, $conn)
                 <div class="addInstructorSection">
                     <button class="btn btn-primary" onclick="window.location.href='add_instructor.php'">Add New Instructor</button>
                 </div>
-                <table class="table table-white">
+                <table class="table table-dark">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

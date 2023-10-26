@@ -8,16 +8,58 @@
             background-color: darkblue;
             color: white;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
         h1 {
             text-align: center;
         }
 
+        .table-container {
+            width: 100%;
+            max-height: 700px;
+            overflow: auto;
+            scrollbar-width: thin;
+            /* For Firefox */
+            scrollbar-color: #333 #666;
+            /* For Firefox */
+        }
+
+        /* WebKit (Chrome, Safari, Edge) scrollbar styles */
+        .table-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+        /* Firefox scrollbar styles */
+        .table-container::-webkit-scrollbar-track {
+            background: #666;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #666;
+        }
+
+
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
+            max-height: 400px;
+            overflow: auto;
+
         }
 
         th,
@@ -30,7 +72,6 @@
         th {
             background-color: #333;
             color: #ffffff;
-
         }
 
         button {
@@ -54,6 +95,7 @@
             text-align: center;
             margin-bottom: 20px;
             background-color: darkblue;
+            margin-top: 5px;
         }
 
         /***** SideBar *****/
@@ -81,7 +123,7 @@
             width: calc(100% - 250px);
             height: 100dvh;
             padding: 0 20px;
-            background-color: #333;
+            background-color: #101010;
             color: #ffffff;
         }
 
@@ -97,6 +139,11 @@
             font-family: 'Inter', sans-serif;
             font-weight: 600;
         }
+
+        .tableHeader {
+            position: sticky;
+            width: 100%;
+        }
     </style>
 
 </head>
@@ -110,41 +157,42 @@
             <nav>
                 <h1 class="nav-text"><a>Subject</a></h1>
             </nav>
+            <div class="table-container">
+                <table>
+                    <tr class="tableHeader">
+                        <th>Subject Name</th>
+                        <th>Subject Code</th>
+                        <th>Description</th>
+                        <th>Unit</th>
+                        <th>Action</th>
+                    </tr>
+                    <?php
+                    require_once 'db_connection.php';
 
-            <table>
-                <tr>
-                    <th>Subject Name</th>
-                    <th>Subject Code</th>
-                    <th>Description</th>
-                    <th>Unit</th>
-                    <th>Action</th>
-                </tr>
-                <?php
-                require_once 'db_connection.php';
+                    $sql = "SELECT * FROM subjects";
+                    $result = $conn->query($sql);
 
-                $sql = "SELECT * FROM subjects";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["name"] . "</td>";
-                        echo "<td>" . $row["code"] . "</td>";
-                        echo "<td>" . $row["description"] . "</td>";
-                        echo "<td>" . $row["unit"] . "</td>";
-                        echo "<td>";
-                        echo "<button onclick='editSubject(" . $row["id"] . ")'>Edit</button>";
-                        echo "<button onclick='deleteSubject(" . $row["id"] . ")'>Delete</button>";
-                        echo "</td>";
-                        echo "</tr>";
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["name"] . "</td>";
+                            echo "<td>" . $row["code"] . "</td>";
+                            echo "<td>" . $row["description"] . "</td>";
+                            echo "<td>" . $row["unit"] . "</td>";
+                            echo "<td>";
+                            echo "<button onclick='editSubject(" . $row["id"] . ")'>Edit</button>";
+                            echo "<button onclick='deleteSubject(" . $row["id"] . ")'>Delete</button>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='4'>No subjects found.</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='4'>No subjects found.</td></tr>";
-                }
 
-                $conn->close();
-                ?>
-            </table>
+                    $conn->close();
+                    ?>
+                </table>
+            </div>
 
             <div class="add-button">
                 <button onclick="location.href='add_subject.php'">

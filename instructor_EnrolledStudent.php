@@ -56,7 +56,7 @@ if ($result) {
                     <h5 class="">Subject: <?php echo $_GET['subjectName'] ?></h5>
                     <button class="btn btn-primary showAddModal">Add Student</button>
                 </div>
-                <table class="table">
+                <table class="table table-dark">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">#</th>

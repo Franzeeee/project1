@@ -1,6 +1,6 @@
 <?php require_once("database_connector.php"); ?>
 
-<html <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -9,23 +9,25 @@
     <title>Register Account</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/reg.css">
 </head>
 
 <body>
     <div class="container">
-        <form action="reg.php" method="POST">
-            <legend>SIGN UP</legend>
-            <input type="text" autocomplete="off" placeholder="Firstname" name="firstname">
-            <input type="text" autocomplete="off" placeholder="Lastname" name="lastname">
-            <input type="text" autocomplete="off" placeholder="Email" name="email">
-            <input type="text" autocomplete="off" placeholder="Username" name="username">
-            <input type="password" placeholder="Password" autocomplete="off" name="password">
-            <input type="submit" value="Register">
-            <a id="signUp" href="login.php">
-                <p>LOGIN</p>
-            </a>
-        </form>
+        <div class="center">
+            <form action="reg.php" method="POST">
+                <legend>SIGN UP</legend>
+                <input type="text" autocomplete="off" placeholder="Firstname" name="firstname">
+                <input type="text" autocomplete="off" placeholder="Lastname" name="lastname">
+                <input type="text" autocomplete="off" placeholder="Email@gmail.com" name="email">
+                <input type="text" autocomplete="off" placeholder="Username" name="username">
+                <input type="text" placeholder="Password" autocomplete="off" name="password">
+                <input type="submit" value="Register">
+                <a id="signUp" href="login.php">
+                    <p>LOGIN</p>
+                </a>
+            </form>
+        </div>
     </div>
 </body>
 

@@ -13,24 +13,27 @@ require_once("lFunction.php");
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body style="height: 89dvh;">
+<body>
+    <div class="center">
+        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" style="min-height: 200px;">
+            <legend id="formChild">LOGIN</legend>
+            <?php
+            if (empty($username)) {
+                $error = '<i style="color: #ff0000c2; font-size: 1em">The username is required.</i>';
+                echo $error;
+            }
 
-    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" style="min-height: 200px;">
-        <legend id="formChild">LOGIN</legend>
-        <?php
-        if (empty($username)) {
-            $error = '<i style="color: #ff0000c2; font-size: 1em">The username is required.</i>';
-            echo $error;
-        }
+            ?>
+            <input id="formChild" placeholder="Email@email.com" autocomplete="off" type="email" name="email">
+            <input id="formChild" placeholder="Password" type="password" name="password">
+            <input id="formChild" value="SIGN IN" type="submit">
+            <a id="signUp" href="reg.php">
+                <p>Sign Up</p>
+            </a>
+        </form>
+    </div>
 
-        ?>
-        <input id="formChild" placeholder="Username" autocomplete="off" type="text" name="username">
-        <input id="formChild" placeholder="Password" type="password" name="password">
-        <input id="formChild" value="SIGN IN" type="submit">
-        <a id="signUp" href="reg.php">
-            <p>Sign Up</p>
-        </a>
-    </form>
+
 
 </body>
 

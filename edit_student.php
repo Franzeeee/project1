@@ -20,14 +20,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle the form submission to update the student's information in the database
-    $new_student_id = $_POST['student_id'];
     $new_lastname = $_POST['lastname'];
     $new_firstname = $_POST['firstname'];
     $id = $_POST['id'];
 
     $pdo = new PDO('mysql:host=localhost; dbname=project1', 'root');
-    $stmt = $pdo->prepare('UPDATE students SET student_id = ?, lastname = ?, firstname = ? WHERE id = ?');
-    $result = $stmt->execute([$new_student_id, $new_lastname, $new_firstname, $id]);
+    $stmt = $pdo->prepare('UPDATE students SET  lastname = ?, firstname = ? WHERE id = ?');
+    $result = $stmt->execute([$new_lastname, $new_firstname, $id]);
 
     if ($result) {
         header('Location: student.php');
@@ -59,16 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         <!-- Content for Edit Student Page -->
         <div class="content">
             <main>
-                <h1>Edit Student</h1>
                 <form method="post" action="edit_student.php">
+                    <legend>Add Student</legend>
                     <input type="hidden" name="id" value="<?php echo $id ?>">
-                    <label for="student_id">Student ID:</label>
-                    <input type="text" name="student_id" value="<?= $student_id ?>" required>
                     <label for="lastname">Lastname:</label>
                     <input type="text" id="lastname" name="lastname" value="<?= $lastname ?>" required>
                     <label for="firstname">Firstname:</label>
                     <input type="text" id="firstname" name="firstname" value="<?= $firstname ?>" required>
                     <button type="submit">Save Changes</button>
+                    <div class="cancel" onclick="window.history.back()">Cancel</div>
                 </form>
                 <main>
         </div>
