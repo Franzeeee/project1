@@ -1,7 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
-    header('location: subject.php');
-} else {
-    echo 'LOGIN!';
+if (empty($_SESSION['name'])) {
+    header('location: login-register/login.php');
 }

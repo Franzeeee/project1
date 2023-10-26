@@ -13,6 +13,7 @@ function getTotalSubjects($instructorId, $conn)
     return $row['total_subjects'];
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +30,12 @@ function getTotalSubjects($instructorId, $conn)
         <?php
         include 'sideBar.php';
         ?>
+        <?php
+
+        if (empty($_SESSION['name'])) {
+            header('location: login-register/login.php');
+        }
+        ?>
         <main>
             <nav>
                 <h1 class="nav-text"><a>Instructor</a></h1>
@@ -38,7 +45,7 @@ function getTotalSubjects($instructorId, $conn)
                 <div class="addInstructorSection">
                     <button class="btn btn-primary" onclick="window.location.href='add_instructor.php'">Add New Instructor</button>
                 </div>
-                <table class="table">
+                <table class="table table-dark">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

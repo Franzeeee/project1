@@ -1,3 +1,4 @@
+
 <?php
 require_once 'db_connection.php';
 $subjectName = $_POST['subject_name'];

@@ -20,7 +20,9 @@
         <!-- Sidebar Code -->
         <!-- Content for Student Subjects Page -->
         <div class="content">
-            <h1>Student Subjects</h1>
+            <nav>
+                <h1 class="nav-text"><a href="student.php" style="color: gray; text-decoration: none">Student</a> > Subject</h1>
+            </nav>
             <?php
             if (isset($_GET['id'])) {
                 $student_id = $_GET['id'];

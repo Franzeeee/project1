@@ -27,16 +27,12 @@ $(document).ready(function () {
             method: 'POST',
             data: { id: id },
             success: function (response) {
-                if (response === 'success') {
-                    // Handle success, e.g., hide modal and update the UI
-                    $(".deleteModal").addClass("d-none");
-                    // Delete the row in our UI
-                    const row = $(`[data-id=${id}]`).closest('tr');
-                    row.remove();
-                    alert('Data deleted successfully.');
-                } else {
-                    alert('Failed to delete data.');
-                }
+
+                $(".deleteModal").addClass("d-none");
+                // Delete the row in our UI
+                const row = $(`[data-id=${id}]`).closest('tr');
+                row.remove();
+                alert('Data deleted successfully.');
             }
         });
     }

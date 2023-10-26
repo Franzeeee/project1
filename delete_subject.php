@@ -40,8 +40,32 @@ $conn->close();
 <head>
     <title>Delete Subject</title>
     <style>
+        /***** SideBar *****/
+        .subject {
+            background-color: #fff;
+            color: black;
+        }
+
+        .subject img {
+            filter: brightness(0);
+        }
+
+        /***** End SideBar *****/
+
+        .wrapper {
+            display: flex;
+            /* background-color: #f0f0f0; */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
         body {
-            background-color: darkblue;
+            background-color: #101010;
             color: white;
             font-family: Arial, sans-serif;
         }
@@ -67,17 +91,11 @@ $conn->close();
             border-bottom: 1px solid white;
         }
 
-        th {
-            background-color: darkblue;
-        }
+        th {}
 
-        tr:nth-child(even) {
-            background-color: #003366;
-        }
+        tr:nth-child(even) {}
 
-        tr:hover {
-            background-color: #002244;
-        }
+        tr:hover {}
 
         form {
             text-align: center;
@@ -85,41 +103,55 @@ $conn->close();
         }
 
         input[type="submit"] {
-            background-color: darkblue;
+            background-color: #494949;
             color: white;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
+            transition: background-color .5s ease;
         }
 
         input[type="submit"]:hover {
             background-color: #002244;
         }
+
+        main {
+            width: calc(100% - 250px);
+            background-color: #101010;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Delete Subject</h1>
+    <div class="wrapper d-flex">
+        <?php
+        include 'sideBar.php';
+        ?>
+        <main>
+            <h1>Delete Subject</h1>
 
-    <p>Are you sure you want to delete the following subject?</p>
+            <p>Are you sure you want to delete the following subject?</p>
 
-    <table>
-        <tr>
-            <th>Subject Code</th>
-            <th>Description</th>
-            <th>Unit</th>
-        </tr>
-        <tr>
-            <td><?php echo $subjectCode; ?></td>
-            <td><?php echo $description; ?></td>
-            <td><?php echo $unit; ?></td>
-        </tr>
-    </table>
+            <table>
+                <tr>
+                    <th>Subject Code</th>
+                    <th>Description</th>
+                    <th>Unit</th>
+                </tr>
+                <tr>
+                    <td><?php echo $subjectCode; ?></td>
+                    <td><?php echo $description; ?></td>
+                    <td><?php echo $unit; ?></td>
+                </tr>
+            </table>
 
-    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id=' . $subjectId; ?>">
-        <input type="submit" value="Delete">
-    </form>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id=' . $subjectId; ?>">
+                <input type="submit" value="Delete">
+            </form>
+        </main>
+    </div>
 </body>
 
 </html>

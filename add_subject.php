@@ -8,7 +8,6 @@
     ?>
     <style>
         body {
-            background-color: darkblue;
             color: white;
             font-family: Arial, sans-serif;
         }
@@ -41,6 +40,7 @@
             display: flex;
             flex-direction: column;
             width: calc(100% - 250px);
+            background-color: #101010;
         }
 
         h1 {
@@ -69,19 +69,31 @@
         }
 
         input[type="submit"] {
-            background-color: darkblue;
+            /* background-color: gray; */
             color: white;
             border: none;
             padding: 15px 25px;
             cursor: pointer;
             border-radius: 5px;
             margin-top: 10px;
-            background-color: #002244;
+            background-color: #222222;
             transition: background-color .5s ease;
         }
 
         input[type="submit"]:hover {
-            background-color: #0073e5;
+            background-color: #051b31;
+        }
+
+        button {
+            padding: 10px 25px;
+            width: 10%;
+            margin: 0 auto;
+            outline: none;
+            background-color: #af0e0e;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            max-width: 135px;
         }
     </style>
 </head>
@@ -109,6 +121,7 @@
 
                 <input type="submit" value="Add Subject">
             </form>
+            <button onclick="window.history.back()">Cancel</button>
         </main>
     </div>
 </body>
